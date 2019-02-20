@@ -2,9 +2,11 @@ const iteraionsNum = 1000000000
 
 const processDummyNothing = ({ prop }) => {}
 
-let sum = 1
-const processDummySum = ({ prop }) => {
-  sum += prop
+const createProcessDummySum = () => {
+  let sum = 1
+  return ({ prop }) => {
+    sum += prop
+  }
 }
 
 let traceIdDummy = 1
@@ -22,7 +24,7 @@ const updateTraceIdDummyStop = () => {
 module.exports = {
   iteraionsNum,
   processDummyNothing,
-  processDummySum,
+  createProcessDummySum,
   updateTraceIdDummyStart,
   updateTraceIdDummyStop,
   traceIdDummy,

@@ -1,10 +1,13 @@
-const { iteraionsNum, processDummySum } = require('../globals')
+const { iteraionsNum, createProcessDummySum } = require('../globals')
+
+const processDummySum = createProcessDummySum()
 
 const obj = {
   prop: 1,
 }
-console.time()
+const t0 = Date.now()
 for (let i = 0; i < iteraionsNum; i++) {
   processDummySum(obj)
 }
-console.timeEnd()
+const t1 = Date.now()
+console.log(t1 - t0)

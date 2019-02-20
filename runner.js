@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { execFileSync } = require('child_process')
+const { median } = require('math-stats')
 
 const runReps = 10
 
@@ -22,9 +23,12 @@ const getFsChildrenFiles = (targetPath) => {
 const benchmarks = getFsChildrenFiles('./tests')
 benchmarks.map((benchmark) => {
   console.log(benchmark)
+  const res = []
   for (let i = 0; i < runReps; i++) {
-    execFileSync('node', [benchmark], {
-      stdio: 'inherit',
-    })
+    const out = execFileSync('node', [benchmark], { encoding: 'utf8' })
+    const outNum = parseInt(out)
+    console.log(`#${i + 1}:`, outNum)
+    res.push(outNum)
   }
+  console.log('median:', median(res))
 })
